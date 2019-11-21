@@ -1,12 +1,11 @@
 <template>
-  <div class="container">
-    <h1 class="title is-size-1">Volleyball Rotations</h1>
-    <div class="columns">
-      <InputNames />
-
-      <Court />
-    </div>
-  </div>
+	<div class="container">
+		<h1 class="title is-size-1">Volleyball Rotations</h1>
+		<div class="columns">
+			<InputNames @playersList="generateList"/>
+			<Court :playersList="this.outputData"/>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -15,14 +14,24 @@ import Court from "@/components/court.vue";
 
 export default {
   data() {
-    return {};
+	return {
+		outputData: "",
+	};
   },
-  methods: {},
+  methods: {
+	  generateList(variable) {
+		  this.outputData = variable;
+			// eslint-disable-next-line
+		console.log(this.outputData);
+	  }
+  },
   components: {
-    InputNames,
-    Court
+	InputNames,
+	Court
   },
-  mounted() {}
+  mounted() {
+
+  }
 };
 </script>
 

@@ -19,10 +19,7 @@
 
 		<div class="field is-grouped">
 			<div class="control">
-				<button class="button is-link" @click="testing">Submit</button>
-			</div>
-			<div class="control">
-				<button class="button is-link is-light">Cancel</button>
+				<button class="button is-link" @click="submit">Submit</button>
 			</div>
 		</div>
 	</div>
@@ -30,6 +27,9 @@
 
 <script>
 export default {
+	// @keyup.enter="submit"
+	// Can use this for instant filling
+
 	data() {
 		return {
 			allPlayers: null,
@@ -37,10 +37,11 @@ export default {
 		};
 	},
 	methods: {
-		testing() {
+		submit() {
 			this.playersList = this.allPlayers.split("\n");
+			this.$emit("playersList", this.playersList)
 			// eslint-disable-next-line
-			console.log(this.playersList);
+			// console.log(this.playersList);
 		}
 	},
 	components: {},
@@ -58,3 +59,4 @@ export default {
 	margin-bottom: 0.5em;
 }
 </style>
+

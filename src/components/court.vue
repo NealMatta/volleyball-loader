@@ -6,12 +6,12 @@
         <div class="columns is-centered is-vcentered court">
             <div class="onCourt column is-9 ">
                 <div class="columns is-multiline" > 
-                    <Player v-for="index in 6" :key="index" class="onCourtPlayers is-3" name="Rick"/>
+                    <Player v-for="index in 6" :key="index" class="onCourtPlayers is-3" :name="playersList[index - 1]"/>
                 </div>
             </div>
             <div class="offCourt column">
                 <div class="columns is-multiline">
-                    <Player v-for="index in 3" :key="index" class="is-12" name="Rick"/>
+                    <Player v-for="index in this.numBenchPlayers" :key="index" class="is-12" :name="playersList[index + 5]"/>
                 </div>                
             </div>  
         </div>
@@ -22,23 +22,26 @@
 import Player from "@/components/player.vue";
 
 export default {
+    props: ["playersList"],
 	data() {
 		return {
 			allPlayers: null,
-			playersList: []
+            numBenchPlayers: null,
 		};
 	},
 	methods: {
-		testing() {
-			this.playersList = this.allPlayers.split("\n");
-			// eslint-disable-next-line
-			console.log(this.playersList);
-		}
 	},
 	components: {
         Player,
     },
-	mounted() {}
+    watch: {
+        playersList: function(){
+            // alert(this.playersList.length);
+            this.numBenchPlayers = this.playersList.length - 6;
+        },
+    },
+	mounted() {
+    }
 };
 </script>
 
